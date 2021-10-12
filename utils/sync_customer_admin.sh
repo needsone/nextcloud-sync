@@ -9,10 +9,10 @@ do
 	for user in `docker exec -u 33 nextclouduzunov_app_1 ./occ  group:list --output=json | jq -r .customer[] -c` ; do
 	    display_name=`docker exec -u 33 nextclouduzunov_app_1 ./occ user:info ${user} --output=json | jq -r .display_name`
 
-	    user_out_dir="${nextcloud_path}/${user}/files/Documents for your Fiduciary/"
-			user_in_dir="${nextcloud_path}/${user}/files/Documents from your Fiduciary/"
-	    admin_in_dir="${nextcloud_path}/${top_admin}/files/Customer/${display_name}/in/"
-			admin_out_dir="${nextcloud_path}/${top_admin}/files/Customer/${display_name}/out/"
+	    user_out_dir="${nextcloud_path}/${user}/files/UPLOAD/"
+			user_in_dir="${nextcloud_path}/${user}/files/DOWNLOAD/"
+	    admin_in_dir="${nextcloud_path}/${top_admin}/files/Customer/${display_name}/receive/"
+			admin_out_dir="${nextcloud_path}/${top_admin}/files/Customer/${display_name}/send/"
 			# the rclone.conf file string muest be your cloud destination
 
 	    dropbox_path="${external_cloud_path_base}/${display_name}"
