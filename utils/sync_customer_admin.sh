@@ -2,7 +2,7 @@
 
 top_admin="admin"
 nextcloud_path="/data/nextclouduzunov/app/data/"
-external_cloud_path_base="dropbox:/Uzunov Consulting/0 Novi Dokumenti/"
+# external_cloud_path_base="dropbox:/Uzunov Consulting/0 Novi Dokumenti/"
 
 while [ 1 ]
 do
@@ -13,6 +13,8 @@ do
 			user_in_dir="${nextcloud_path}/${user}/files/DOWNLOAD/"
 	    admin_in_dir="${nextcloud_path}/${top_admin}/files/Customer/${display_name}/receive/"
 			admin_out_dir="${nextcloud_path}/${top_admin}/files/Customer/${display_name}/send/"
+			dropbox_path="dropbox:/Uzunov Consulting/0 Novi Dokumenti/${display_name}"
+
 			# the rclone.conf file string muest be your cloud destination
 
 	    dropbox_path="${external_cloud_path_base}/${display_name}"
