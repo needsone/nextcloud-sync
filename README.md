@@ -17,3 +17,8 @@ Dans notre cas nous avons besoin des outils suivant :
 
 ## A faire avant:
 Configurer le path de notre cloud externe (dans notre cas dropbox).
+
+
+# TODO
+
+## Logo plus visible
