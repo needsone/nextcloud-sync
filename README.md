@@ -11,13 +11,12 @@ Dans notre cas nous avons besoin des outils suivant :
 
 - docker pour nextcloud
 - rsync
-- python (next version)
+- python or Go (next version)
 - rclone
 - git
 
 ## A faire avant:
 Configurer le path de notre cloud externe (dans notre cas dropbox).
-
 
 # TODO
 

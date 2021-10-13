@@ -1,7 +1,7 @@
 #!/bin/bash
 
 top_admin="admin"
-nextcloud_path="/data/nextclouduzunov/app/data/"
+nextcloud_path="/data/nextclouduzunov/app/data"
 # external_cloud_path_base="dropbox:/Uzunov Consulting/0 Novi Dokumenti/"
 
 while [ 1 ]
@@ -13,8 +13,6 @@ do
 			user_in_dir="${nextcloud_path}/${user}/files/DOWNLOAD/"
 	    admin_in_dir="${nextcloud_path}/${top_admin}/files/Customer/${display_name}/receive/"
 			admin_out_dir="${nextcloud_path}/${top_admin}/files/Customer/${display_name}/send/"
-			dropbox_path="dropbox:/Uzunov Consulting/0 Novi Dokumenti/${display_name}"
-
 			# the rclone.conf file string muest be your cloud destination
 
 	    dropbox_path="${external_cloud_path_base}/${display_name}"
@@ -30,13 +28,15 @@ do
 			if [ ! -d "${admin_dir}" ]; then
 				sudo -u www-data mkdir -p "${admin_out_dir}"
 			fi
-	    sudo -u www-data rsync -ac "${user_out_dir}" "${admin_in_dir}"
 
-	    # echo "${drop_path}"
+			# From customer to admin
+	    sudo -u www-data rsync -arc "${user_out_dir}" "${admin_in_dir}"
 			# dropbox folder creation and rsync of files to dropbox
     	rclone mkdir "${dropbox_path}"
 	    rclone copy "${user_out_dir}" "${dropbox_path}"
-	    sudo -u www-data rm -f ${user_out_dir}/*
+	    sudo -u www-data rm -rf ${user_out_dir}/*
+
+			# From Admin to customer
 			sudo -u www-data rsync -ac 	"${admin_out_dir}" "${user_in_dir}"
 	    docker exec -u 33 nextclouduzunov_app_1 ./occ files:scan -n ${user}
 	done
