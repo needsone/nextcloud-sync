@@ -36,7 +36,7 @@ do
 			# dropbox folder creation and rsync of files to dropbox
     	rclone mkdir "${dropbox_path}"
 	    rclone copy "${user_out_dir}" "${dropbox_path}"
-#	    sudo -u www-data rm -f ${user_out_dir}/*
+	    sudo -u www-data rm -f ${user_out_dir}/*
 			sudo -u www-data rsync -ac 	"${admin_out_dir}" "${user_in_dir}"
 	    docker exec -u 33 nextclouduzunov_app_1 ./occ files:scan -n ${user}
 	done
