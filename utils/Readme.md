@@ -1,5 +1,3 @@
-English below
-
 Hi and welcome to your Uzunov Cloud space!
 
 This e-space will let you transmit all your accounting and tax information to your fiduciary.

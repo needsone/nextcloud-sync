@@ -12,7 +12,7 @@ Dans notre cas nous avons besoin des outils suivant :
 - docker pour nextcloud
 - rsync
 - python or Go (next version)
-- rclone
+- rclone latest version unmarshable bug avec bcp de mes fichiers
 - git
 
 ## A faire avant:
