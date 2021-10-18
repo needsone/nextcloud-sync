@@ -21,7 +21,7 @@ do
   if [ ! -d "${user_in_dir}" ]; then
    sudo -u www-data mkdir -p "${user_in_dir}"
   fi
-  if [ ! -d "${admin_dir}" ]; then
+  if [ ! -d "${admin_diar}" ]; then
    sudo -u www-data mkdir -p "${admin_in_dir}"
   fi
   if [ ! -d "${admin_dir}" ]; then
@@ -30,7 +30,8 @@ do
 
   # From customer to admin
   sudo -u www-data rsync -arc "${user_out_dir}" "${admin_in_dir}"
-  sudo -u www-data rm -rf ${user_out_dir}/*
+  sudo -u www-data find find ${user_out_dir}/* -mmin +20 -exec rm {} \; 
+  # rm -rf ${user_out_dir}/
 
   # From Admin to customer
   sudo -u www-data rsync -ac  "${admin_out_dir}" "${user_in_dir}"
