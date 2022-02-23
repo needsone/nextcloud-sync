@@ -1,10 +1,21 @@
-Hi and welcome to your Uzunov Cloud space!
+# NextCloud Sync
 
-This e-space will let you transmit all your accounting and tax information to your fiduciary.
+This project is a way to upload files from customer and working team
+with nextcloud and do a copy all of the files submited by the customer
+to his accountant (was made for an accountant).
+
+My customer did want to get files transfer by e-mail anymore.
+We did install a Nexcloud server for him and we setup this process.
+
+It is now the version alpha of this project.
+
+From 1 use case to a fully usable prouct.
+
+This e-space will let you transmit all your files to your accoutnant.
 For all New document transmission, please use the *UPLOAD* folder.
 
-All documents already prepared by UC will be available in the *DOWNLOAD* folder.
+And the accountant will find this files in a shared by admin repository/Client_name/download.
 
-We thank you and wish you a nice day!
+It also work from the accountant to his customer.
 
-UC Team
+It is a bit too simple now.
