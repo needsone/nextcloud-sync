@@ -31,10 +31,7 @@ do
   # From customer to admin
   sudo -u www-data rsync -arc "${user_out_dir}" "${admin_in_dir}"
   sudo -u www-data find ${user_out_dir}/ -type f ! -iname '*.part' -mmin +21 -exec rm {} \;
-  # We remove only files
-  sudo -u www-data find find ${user_out_dir}/* -mmin +20 -exec rm {} \; 
-  # rm -rf ${user_out_dir}/
-
+  
   # From Admin to customer
   sudo -u www-data rsync -arc --delete --exclude '*.md' --exclude '*.part' "${admin_out_dir}" "${user_in_dir}"
 
@@ -45,8 +42,8 @@ do
   # Next versiob we need to test if new files were copy to run files:scan
 
   docker exec -u 33 ${container_name} ./occ files:scan -n ${user}
-  done
+ done
 docker exec -u 33 ${container_name} ./occ files:scan -n ${top_admin}
-#echo "Let's sleep a bit"dd
+#echo "Let's sleep a bit"
 sleep 20
 done
