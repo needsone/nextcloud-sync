@@ -1,9 +1,9 @@
 #!/bin/bash
 
 top_admin="admin"
-nextcloud_path="/data/nextclouduzunov/app/data"
-external_cloud_path_base="dropbox:/Uzunov Consulting/0 Novi Dokumenti/"
-container_name="nextclouduzunov_app_1"
+nextcloud_path="/folder_with_nextcloud/app/data"
+external_cloud_path_base="dropbox:/folder/p/"
+container_name="nextcloud_app"
 
 while [ 1 ]
 do
@@ -30,19 +30,23 @@ do
 
   # From customer to admin
   sudo -u www-data rsync -arc "${user_out_dir}" "${admin_in_dir}"
+  sudo -u www-data find ${user_out_dir}/ -type f ! -iname '*.part' -mmin +21 -exec rm {} \;
+  # We remove only files
   sudo -u www-data find find ${user_out_dir}/* -mmin +20 -exec rm {} \; 
   # rm -rf ${user_out_dir}/
 
   # From Admin to customer
-  sudo -u www-data rsync -ac  "${admin_out_dir}" "${user_in_dir}"
+  sudo -u www-data rsync -arc --delete --exclude '*.md' --exclude '*.part' "${admin_out_dir}" "${user_in_dir}"
 
   # dropbox folder creation and rsync of files to dropbox
   rclone mkdir "${dropbox_path}"
   rclone copy "${admin_in_dir}" "\"${dropbox_path}\""
 
+  # Next versiob we need to test if new files were copy to run files:scan
+
   docker exec -u 33 ${container_name} ./occ files:scan -n ${user}
   done
 docker exec -u 33 ${container_name} ./occ files:scan -n ${top_admin}
-#echo "Let's sleep a bit"
+#echo "Let's sleep a bit"dd
 sleep 20
 done
