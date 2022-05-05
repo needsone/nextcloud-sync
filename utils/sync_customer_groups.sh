@@ -20,15 +20,15 @@ do
       user_in_dir="${nextcloud_path}/${user}/files/DOWNLOAD/"
       # echo $user
       if [ $group = '.customerpp[]' ]; then
-        customer_group_path="Customer_PP"
-        admin_in_dir="${nextcloud_path}/${top_admin}/files/${customer_group_path}/${display_name}/receive/"
-        admin_out_dir="${nextcloud_path}/${top_admin}/files/${customer_group_path}/${display_name}/send/"
+        user_group_path="Customer_PP"
+        admin_in_dir="${nextcloud_path}/${top_admin}/files/${user_group_path}/${display_name}/receive/"
+        admin_out_dir="${nextcloud_path}/${top_admin}/files/${user_group_path}/${display_name}/send/"
         external_cloud_path="${external_cloud_path_base}/${display_name}/"
       fi
       if [ $group = '.customerpm[]' ]; then
-        customer_group_path="Customer_PM"
-        admin_in_dir="${nextcloud_path}/${top_admin}/files/${customer_group_path}/${display_name}/receive/"
-        admin_out_dir="${nextcloud_path}/${top_admin}/files/${customer_group_path}/${display_name}/send/"
+        user_group_path="Customer_PM"
+        admin_in_dir="${nextcloud_path}/${top_admin}/files/${user_group_path}/${display_name}/receive/"
+        admin_out_dir="${nextcloud_path}/${top_admin}/files/${user_group_path}/${display_name}/send/"
         full_name=""
         this_year=`date +%Y`
         declaration_year=`expr $this_year - 1`
@@ -79,7 +79,7 @@ do
         # echo "Lets run"
         docker exec -u 33 ${container_name} ./occ files:scan -p "${user}/files/UPLOAD"
         docker exec -u 33 ${container_name} ./occ files:scan -p "${user}/files/DOWNLOAD"
-        docker exec -u 33 ${container_name} ./occ files:scan -p "admin/files/${customer_group_path}/${display_name}"
+        docker exec -u 33 ${container_name} ./occ files:scan -p "admin/files/${user_group_path}/${display_name}"
       fi
     done
   done
